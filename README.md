@@ -1,16 +1,56 @@
 Here're some instructions and convenient macros for running key4hep from CernVM-FS (especially graphic interface) in an el9 container on MacOS.
 
-#CernVM-FS client on Mac
+# CernVM-FS client on Mac
 
-Reference: [CernVM-FS documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html) and [TWiki](https://twiki.cern.ch/twiki/bin/view/AtlasComputing/Cvmfs21).
+Reference: CernVM-FS [documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html) and [TWiki](https://twiki.cern.ch/twiki/bin/view/AtlasComputing/Cvmfs21).
 
-##Installation
+## Installation
+### macFUSE
 CVMFS is based on [macFUSE](https://osxfuse.github.io/). Download an install macFUSE4 for MacOS 11, the installation will tell you to:
-* enable [kernel extensions](https://support.apple.com/guide/mac-help/change-security-settings-startup-disk-a-mac-mchl768f7291/mac)
+* enable [kernel extensions](https://support.apple.com/guide/mac-help/change-security-settings-startup-disk-a-mac-mchl768f7291/mac) (recovery mode -> Startup Security Utility)
 * allow updates to software from Benjamin Fleischer (System Preferences -> Privacy)
-* reboot
+* reboot system
 
-Verify that fuse is available with:
+You can verify that fuse is available with:
 ```
 kextstat | grep -i fuse
 ```
+### CVMFS
+Then, download CernVM-FS client package:
+```
+curl -o ~/Downloads/cvmfs-2.11.3.pkg https://ecsft.cern.ch/dist/cvmfs/cvmfs-2.11.3/cvmfs-2.11.3.pkg
+```
+Alternatively, a native package for Apple Silicon M1/M2... processors is available as well:
+```
+curl -o ~/Downloads/cvmfs-2.11.2-applesilicon.pkg https://ecsft.cern.ch/dist/cvmfs/cvmfs-2.11.2/cvmfs-2.11.2-applesilicon.pkg
+```
+* open the `.pkg` file and install it
+* reboot after installing
+  
+## Configuration
+The following configuration needs to be done as superuser.
+* for the basic setup, run `sudo cvmfs_config setup`
+* copy `default.local` to `/etc/cvmfs/default.local`
+
+Then, mount each of the individual repositories in `default.local`.
+* create the mount points:
+```
+sudo mkdir -p /cvmfs/cvmfs-config.cern.ch
+sudo mkdir -p /cvmfs/sw.hsf.org
+sudo mkdir -p /cvmfs/sw-nightlies.hsf.org
+sudo mkdir -p /cvmfs/clicdp.cern.ch
+sudo mkdir -p /cvmfs/sft.cern.ch
+sudo mkdir -p /cvmfs/geant4.cern.ch
+sudo mkdir -p /cvmfs/sft-nightlies.cern.ch
+```
+* make `mount/mount.sh` and `mount/unmount.sh` executable:
+```
+chmod +x mount/mount.sh
+chmod +x mount/unmount.sh
+```
+* mount/unmount CVMFS by doing:
+```
+sudo mount/mount.sh
+sudo mount/unmount.sh
+```
+You can check if CVMFS mounts your repositories by `cvmfs_config probe`. It should says OK.
