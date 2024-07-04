@@ -61,7 +61,7 @@ You can check if CVMFS mounts your repositories by `cvmfs_config probe`.
 
 ## Configure X11
 * open Xquartz, go into Xquartz -> Settings -> Security.
-* check `Allow connections from network clients`.
+* check the box `Allow connections from network clients`.
 * open Terminal, enter the following command to enable OpenGL rendering:
 ```
 defaults write org.xquartz.X11 enable_iglx -bool true
@@ -74,7 +74,7 @@ xhost +localhost
 ```
 
 # Use el9 docker image
-The docker image we're using is `ghcr.io/aidasoft/el9:latest`. Change `docker_tag` in `docker-macos.sh` if you want to use a different image.
+The docker image being used is `ghcr.io/aidasoft/el9:latest`. Change `docker_tag` in `docker-macos.sh` if you want to use a different image.
 * Create your `/workarea`, copy `docker-macos.sh` and `warm-up.sh` inside.
 * Make sure docker desktop is running. To run a docker container of el9, from `/workarea`:
 ```
