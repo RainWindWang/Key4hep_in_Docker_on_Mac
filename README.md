@@ -1,4 +1,4 @@
-Here're some instructions and convenient macros for running key4hep from CernVM-FS (especially graphic interface) in an el9 container on MacOS.
+Here're some instructions and convenient macros for running key4hep from CernVM-FS (especially graphical interface) in an el9 container on MacOS.
 
 # CernVM-FS client on Mac
 
@@ -60,7 +60,7 @@ You can check if CVMFS mounts your repositories by `cvmfs_config probe`.
 * Download and install [Xquartz](https://www.xquartz.org) (or `brew install xquartz`).
 
 ## Configure X11
-* open Xquartz, go into Xquartz->Settings->Security.
+* open Xquartz, go into Xquartz -> Settings -> Security.
 * check `Allow connections from network clients`.
 * open Terminal, enter the following command to enable OpenGL rendering:
 ```
@@ -74,3 +74,15 @@ xhost +localhost
 ```
 
 # Use el9 docker image
+The docker image we're using is `ghcr.io/aidasoft/el9:latest`. Change `docker_tag` in `docker-macos.sh` if you want to use a different image.
+* Create your workarea, copy `docker-macos.sh` and `warm-up.sh` inside.
+* Make sure docker desktop is running. Now you can run a docker container of el9, and setup key4hep of any version from CVMFS by doing:
+```
+./docker-macos.sh
+source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+```
+* ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing:
+```
+./warm-up.sh
+```
+Then running a graphical interface will be just as fast as running it locally.
