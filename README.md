@@ -75,14 +75,23 @@ xhost +localhost
 
 # Use el9 docker image
 The docker image we're using is `ghcr.io/aidasoft/el9:latest`. Change `docker_tag` in `docker-macos.sh` if you want to use a different image.
-* Create your workarea, copy `docker-macos.sh` and `warm-up.sh` inside.
-* Make sure docker desktop is running. Now you can run a docker container of el9, and setup key4hep of any version from CVMFS by doing:
+* Create your `/workarea`, copy `docker-macos.sh` and `warm-up.sh` inside.
+* Make sure docker desktop is running. To run a docker container of el9, from `/workarea`:
 ```
 ./docker-macos.sh
+```
+By doing so, `/tmp/.X11-unix` (read only), `/cvmfs` (shared) and `$PWD` (your current working area) are mounted. The container will be automatically deleted when it exits.
+* Now you can setup key4hep of any version from CVMFS. Note that ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing something like this:
+```
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
-```
-* ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing:
-```
 ./warm-up.sh
 ```
-Then running a graphical interface will be just as fast as running it locally.
+Then running a ROOT graphical interface will be just as fast as running it locally. You can try it with LUXE tracker TGeo file `LUXETrackerAsEndcap.root`:
+```
+root
+// once root is running:
+TGeoManager::Import("LUXETrackerAsEndcap.root")
+gGeoManager->GetTopVolume()->Draw("ogl")
+```
+
+Enjoy!
