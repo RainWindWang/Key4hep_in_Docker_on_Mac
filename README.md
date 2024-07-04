@@ -81,7 +81,8 @@ The docker image we're using is `ghcr.io/aidasoft/el9:latest`. Change `docker_ta
 ./docker-macos.sh
 ```
 By doing so, `/tmp/.X11-unix` (read only), `/cvmfs` (shared) and `$PWD` (your current working area) are mounted. The container will be automatically deleted when it exits.
-* Now you can setup key4hep of any version from CVMFS. Note that ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing something like this:
+## Warming up
+Now you can setup key4hep of any version from CVMFS. Note that ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing something like this:
 ```
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 ./warm-up.sh
