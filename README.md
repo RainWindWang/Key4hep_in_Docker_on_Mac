@@ -43,7 +43,7 @@ sudo mkdir -p /cvmfs/sft.cern.ch
 sudo mkdir -p /cvmfs/geant4.cern.ch
 sudo mkdir -p /cvmfs/sft-nightlies.cern.ch
 ```
-* make `mount/mount.sh` and `mount/unmount.sh` executable:
+* make `mount/mount.sh` and `mount/unmount.sh` executable (and put them somewhere you can access as `sudo`):
 ```
 chmod +x mount/mount.sh
 chmod +x mount/unmount.sh
@@ -53,4 +53,24 @@ chmod +x mount/unmount.sh
 sudo mount/mount.sh
 sudo mount/unmount.sh
 ```
-You can check if CVMFS mounts your repositories by `cvmfs_config probe`. It should says OK.
+You can check if CVMFS mounts your repositories by `cvmfs_config probe`.
+
+# Docker and Xquartz
+* Download and install [Docker desktop](https://www.docker.com/products/docker-desktop).
+* Download and install [Xquartz](https://www.xquartz.org) (or `brew install xquartz`).
+
+## Configure X11
+* open Xquartz, go into Xquartz->Settings->Security.
+* check `Allow connections from network clients`.
+* open Terminal, enter the following command to enable OpenGL rendering:
+```
+defaults write org.xquartz.X11 enable_iglx -bool true
+```
+* reboot Xquartz.
+
+Everytime you start Mac, enter the following command in Terminal (it's already in `docker-macos.sh`)
+```
+xhost +localhost
+```
+
+# Use el9 docker image
