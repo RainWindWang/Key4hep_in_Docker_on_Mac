@@ -85,7 +85,7 @@ By doing so, `/tmp/.X11-unix` (read only), `/cvmfs` (shared) and `$PWD` (your cu
 Now you can setup key4hep of any version from CVMFS. Note that ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing something like this:
 ```
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
-./warm-up.sh
+source warm-up.sh
 ```
 Then running a ROOT graphical interface will be just as fast as running it locally. You can try it with LUXE tracker TGeo file `LUXETrackerAsEndcap.root`:
 ```
