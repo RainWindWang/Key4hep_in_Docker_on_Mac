@@ -104,7 +104,6 @@ However, installing the `vim-enhanced` package takes a few minumtes everytime, w
 mkdir el9-vim
 cd el9-vim
 vi Dockerfile
-
 ```
 * add the following lines into `Dockerfile`:
 ```
@@ -121,7 +120,6 @@ set t_Co=256' > /root/.vimrc
 
 # set default command to bash
 CMD ["/bin/bash"]
-
 ```
 * with `Dockerfile`, you can create your new image:
 ```
