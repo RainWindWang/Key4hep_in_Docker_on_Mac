@@ -32,12 +32,22 @@ The following configuration needs to be done as superuser.
 * for the basic setup, run `sudo cvmfs_config setup`.
 * copy `default.local` to `/etc/cvmfs/default.local`.
 
+If you need [ILCSoft](https://twiki.cern.ch/twiki/bin/view/CLIC/CLICCvmfs) (ilc.desy.de) on CVMFS, here're two additional steps:
+*  create a desy config file `/etc/cvmfs/domain.d/desy.de.conf`.
+```
+CVMFS_SERVER_URL='http://grid-cvmfs-one.desy.de:8000/cvmfs/@fqrn@;http://cvmfs-stratum-one.cern.ch:8000/cvmfs/@fqrn@;http://cvmfs-egi.gridpp.rl.ac.uk:8000/cvmfs/@fqrn@'
+CVMFS_KEYS_DIR=/etc/cvmfs/keys
+```
+* Copy the DESY CVMFS public key from [here](https://confluence.desy.de/display/grid/DESY-CVMFS-Repositories_174022946.html), put it in `CVMFS_KEYS_DIR=/etc/cvmfs/keys/desy.de.pub`.
+
 Then, mount each of the individual repositories in `default.local`.
+
 * create the mount points:
 ```
 sudo mkdir -p /cvmfs/cvmfs-config.cern.ch
 sudo mkdir -p /cvmfs/sw.hsf.org
 sudo mkdir -p /cvmfs/sw-nightlies.hsf.org
+sudo mkdir -p /cvmfs/ilc.desy.de
 sudo mkdir -p /cvmfs/clicdp.cern.ch
 sudo mkdir -p /cvmfs/sft.cern.ch
 sudo mkdir -p /cvmfs/geant4.cern.ch

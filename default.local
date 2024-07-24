@@ -1,7 +1,7 @@
 CVMFS_QUOTA_LIMIT='32140'
 CVMFS_HTTP_PROXY=DIRECT
 CVMFS_FORCE_SIGNING='yes'
-CVMFS_REPOSITORIES='sw.hsf.org,sw-nightlies.hsf.org,clicdp.cern.ch,sft.cern.ch,geant4.cern.ch,sft-nightlies.cern.ch'
+CVMFS_REPOSITORIES='sw.hsf.org,sw-nightlies.hsf.org,ilc.desy.de,clicdp.cern.ch,sft.cern.ch,geant4.cern.ch,sft-nightlies.cern.ch'
 CVMFS_SEND_INFO_HEADER=no
 CVMFS_CLAIM_OWNERSHIP=yes
 # CVMFS_CLIENT_PROFILE=single
