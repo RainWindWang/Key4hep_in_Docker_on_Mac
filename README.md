@@ -124,9 +124,8 @@ CMD ["/bin/bash"]
 * with `Dockerfile`, you can create your new image:
 ```
 docker build -t el9-vim-enhanced .
-
 ```
-* use `el9-vim-enhanced` as `docker_tag` in `docker-macro.sh` instead.
+* check it with command `docker images`. You can now use `el9-vim-enhanced` as `docker_tag` in `docker-macro.sh` instead.
 
 ## Root warming up
 Now you can setup key4hep of any version from CVMFS. Note that ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing something like this:
