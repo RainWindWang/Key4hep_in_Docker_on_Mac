@@ -91,7 +91,46 @@ The docker image being used is `ghcr.io/aidasoft/el9:latest`. Change `docker_tag
 ./docker-macos.sh
 ```
 By doing so, `/tmp/.X11-unix` (read only), `/cvmfs` (shared) and `$PWD` (your current working area) are mounted. The container will be automatically deleted when it exits.
-## Warming up
+
+## Terminal and Vim color
+(You can for sure skip this part if you don't care about their color)
+
+* `color-warm-up.sh` colors your terminal inside container (it's already in `warm-up.sh`). Simply do `source color-warm-up.sh` after the container is running.
+* `init-vim-color.sh` colors your vim when the container is started. To make it work, add the two commented lines into the docker run command in `docker-macos.sh`.
+
+However, installing the `vim-enhanced` package takes a few minumtes everytime, which is kind of annoying. You can as well create a new image with `vim-enhanced` installed:
+* create a docker file locally:
+```
+mkdir el9-vim
+cd el9-vim
+vi Dockerfile
+
+```
+* add the following lines into `Dockerfile`:
+```
+# use ghcr.io/aidasoft/el9:latest as basic image
+FROM ghcr.io/aidasoft/el9:latest
+
+# update and install vim-enhanced pkg
+RUN dnf update -y && dnf install -y vim-enhanced
+
+# create and config ~/.vimrc
+RUN echo 'syntax on\n\
+set background=dark\n\
+set t_Co=256' > /root/.vimrc
+
+# set default command to bash
+CMD ["/bin/bash"]
+
+```
+* with `Dockerfile`, you can create your new image:
+```
+docker build -t el9-vim-enhanced .
+
+```
+* use `el9-vim-enhanced` as `docker_tag` in `docker-macro.sh` instead.
+
+## Root warming up
 Now you can setup key4hep of any version from CVMFS. Note that ROOT (or anyother software from CVMFS) will be slow for the first time you run it. Warm it up right after running the docker container by doing something like this:
 ```
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
