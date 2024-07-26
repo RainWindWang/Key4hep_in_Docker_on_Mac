@@ -107,16 +107,22 @@ vi Dockerfile
 ```
 * add the following lines into `Dockerfile`:
 ```bash
-# use ghcr.io/aidasoft/el9:latest as basic image
+# choose a basic image
 FROM ghcr.io/aidasoft/el9:latest
+#FROM ghcr.io/aidasoft/centos7:latest
 
 # update and install vim-enhanced pkg
+# el9:
 RUN dnf update -y && dnf install -y vim-enhanced
+# centos7:
+# RUN yum update -y && dnf install -y vim-enhanced
 
 # create and config ~/.vimrc
 RUN echo 'syntax on\n\
 set background=dark\n\
 set t_Co=256' > /root/.vimrc
+
+#-------------------------------------------------
 
 # copy color-warm-up.sh file into the image, and add them into .bashrc
 COPY color-warm-up.sh /tmp/color.sh
