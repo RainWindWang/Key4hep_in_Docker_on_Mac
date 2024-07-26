@@ -1,12 +1,16 @@
 # docker image:
-docker_tag=ghcr.io/aidasoft/el9:latest
+# el9 for acts 32, centos7 for acts 13
 
-# if you want to color your vim, add these two lines to the docker run command:
+docker_tag=ghcr.io/aidasoft/el9:latest
+#docker_tag=ghcr.io/aidasoft/centos7:latest
+
+# if you want to color your vim in the container, add these two lines to the docker run command:
 ##    -v ./init-vim-color.sh:/root/init-vim-color.sh \
 ##   /root/init-vim-color.sh  # this line has to be at the end of the command
 
-# OR: this is a home made el9 with vim-enhanced pre-installed
-#docker_tag=el9-vim-enhanced
+# OR: use a home-made image with vim-enhanced pre-installed and terminal color pre-configured
+#docker_tag=el9-color-enhanced
+#docker_tag=centos7-color-enhanced
 
 xhost +localhost
 echo "Starting ${docker_tag}"

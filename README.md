@@ -92,7 +92,7 @@ The docker image being used is `ghcr.io/aidasoft/el9:latest`. Change `docker_tag
 ```
 By doing so, `/tmp/.X11-unix` (read only), `/cvmfs` (shared) and `$PWD` (your current working area) are mounted. The container will be automatically deleted when it exits.
 
-## Terminal and Vim color
+## Terminal and Vim color in container
 (You can for sure skip this part if you don't care about their color)
 
 * `color-warm-up.sh` colors your terminal inside container (it's already in `warm-up.sh`). Simply do `source color-warm-up.sh` after the container is running.
