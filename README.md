@@ -118,9 +118,7 @@ RUN dnf update -y && dnf install -y vim-enhanced
 # RUN yum update -y && dnf install -y vim-enhanced
 
 # create and config ~/.vimrc
-RUN echo 'syntax on\n\
-set background=dark\n\
-set t_Co=256' > /root/.vimrc
+RUN echo -e 'syntax on\nset background=dark\nset t_Co=256' > /root/.vimrc
 
 #-------------------------------------------------
 
