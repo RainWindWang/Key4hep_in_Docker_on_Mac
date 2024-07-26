@@ -98,7 +98,7 @@ By doing so, `/tmp/.X11-unix` (read only), `/cvmfs` (shared) and `$PWD` (your cu
 * `color-warm-up.sh` colors your terminal inside container (it's already in `warm-up.sh`). Simply do `source color-warm-up.sh` after the container is running.
 * `init-vim-color.sh` colors your vim when the container is started. To make it work, add the two commented lines into the docker run command in `docker-macos.sh`.
 
-However, installing the `vim-enhanced` package takes a few minumtes everytime, which is kind of annoying. You can as well create a new image with `vim-enhanced` installed and terminal color configured:
+However, installing the `vim-enhanced` package takes a few minumtes everytime, which is kind of annoying. You can as well create a new image with `vim-enhanced` pre-installed and terminal color pre-configured:
 * create a docker file locally:
 ```bash
 mkdir el9-vim
